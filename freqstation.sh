@@ -70,10 +70,13 @@ readvalue ()
 }
 
 TMPV="tempvalue"
-for sta in $LNP7_s $LNP6_s $LNP5_s $LNP4_s $LNP3_s $LNP2_s
+for sta in $LNP7_s $LNP6_s $LNP5_s $LNP4_s $LNP3_s $LNP2_s $LNP1_s
 do
 
 	case $sta in
+		$LNP1_s)
+			namefile="LNP1_"`echo $sta | sed 's/\./_/g'`
+			;;
 		$LNP2_s)
 			namefile="LNP2_"`echo $sta | sed 's/\./_/g'`
 			;;
