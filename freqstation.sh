@@ -1,4 +1,4 @@
-﻿#!/bin/bash
+#!/bin/bash
 homedir="/home/eas/monitor_stat/"
 source "$homedir"stations.sh
 sta=""
@@ -70,7 +70,7 @@ readvalue ()
 }
 
 TMPV="tempvalue"
-for sta in $LNP7_s $LNP6_s $LNP5_s $LNP4_s $LNP3_s $LNP2_s $LNP1_s
+for sta in $LNP8_s $LNP7_s $LNP6_s $LNP5_s $LNP4_s $LNP3_s $LNP2_s $LNP1_s
 do
 
 	case $sta in
@@ -95,6 +95,9 @@ do
 		$LNP7_s)
 			namefile="LNP7_"`echo $sta | sed 's/\./_/g'`
 			;;
+                $LNP8_s)
+                        namefile="LNP8_"`echo $sta | sed 's/\./_/g'`
+                        ;;
 	esac
 
 	namefile=$homedir$namefile
