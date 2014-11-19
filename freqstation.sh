@@ -70,7 +70,7 @@ readvalue ()
 }
 
 TMPV="tempvalue"
-for sta in $LNP8_s $LNP7_s $LNP6_s $LNP5_s $LNP4_s $LNP3_s $LNP2_s $LNP1_s
+for sta in $LNP11_s $LNP10_s $LNP9_s $LNP8_s $LNP7_s $LNP6_s $LNP5_s $LNP4_s $LNP3_s $LNP2_s $LNP1_s
 do
 
 	case $sta in
@@ -95,9 +95,18 @@ do
 		$LNP7_s)
 			namefile="LNP7_"`echo $sta | sed 's/\./_/g'`
 			;;
-                $LNP8_s)
-                        namefile="LNP8_"`echo $sta | sed 's/\./_/g'`
-                        ;;
+		$LNP8_s)
+			namefile="LNP8_"`echo $sta | sed 's/\./_/g'`
+			;;
+		$LNP9_s)
+			namefile="LNP9_"`echo $sta | sed 's/\./_/g'`
+			;;
+		$LNP10_s)
+			namefile="LNP10_"`echo $sta | sed 's/\./_/g'`
+			;;
+		$LNP11_s)
+			namefile="LNP11_"`echo $sta | sed 's/\./_/g'`
+			;;
 	esac
 
 	namefile=$homedir$namefile
