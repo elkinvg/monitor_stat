@@ -288,3 +288,6 @@ else
 	fi
 fi
 done
+
+LNPS=`ls | grep LNP`
+./diag.exe $LNPS
