@@ -289,5 +289,6 @@ else
 fi
 done
 
+. setup.sh
 LNPS=`ls | grep LNP`
 ./diag.exe $LNPS
