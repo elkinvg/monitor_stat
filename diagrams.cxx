@@ -58,7 +58,7 @@ int main (int argc, char** argv)
         string filename = pwd + "/" + string(argv[i+2]);
 
         vecSTNN = readDataFromFile(filename);
-        makePlotForStation(vecSTNN, stationNumberString);
+        makePlotForStation(vecSTNN, stationNumberString, pwd);
     }
 }
 
@@ -107,12 +107,12 @@ void makePlotForStation(const vector<int>& StatusTimeNeventsNsec, string statioN
 {
 
     string dirname = pwd+"/img";
-    cout << dirname << endl;
+
     if (!checkDir(dirname.c_str())) mkdir(dirname.c_str(),0755);
     string nameCanv;
     nameCanv = "Station_"+statioNumber;
     int N = StatusTimeNeventsNsec.size()/4;
-    TCanvas *canvas = new TCanvas(nameCanv.c_str(),nameCanv.c_str(),600,300);
+    TCanvas *canvas = new TCanvas(nameCanv.c_str(),nameCanv.c_str(),800,300);
 
     int iVec=0;
     Double_t time[N],nEvent[N],nSec[N],freq[N];
@@ -129,6 +129,7 @@ void makePlotForStation(const vector<int>& StatusTimeNeventsNsec, string statioN
 
         if (nSec[i]==0 || nEvent[i]<0) freq[i]=0;
         else freq[i] = nEvent[i] / nSec[i];
+
     }
 
     TGraph *graph = new TGraph(N,time,freq);
@@ -149,10 +150,22 @@ void makePlotForStation(const vector<int>& StatusTimeNeventsNsec, string statioN
     graph->SetMinimum(0);
     graph->Draw("AB");
 
-    TText *labels = new TText(.25,.94,"ON");
-    labels->SetNDC();
-    labels->SetTextColor(10);
-    labels->Draw("same");
+    TText *labels;
+
+    if (freq[(iVec-1)/4])
+    {
+        labels = new TText(.25,.94,"ON");
+        labels->SetNDC();
+        labels->SetTextColor(3);
+        labels->Draw("same");
+    }
+    else
+    {
+        labels = new TText(.25,.94,"OFF");
+        labels->SetNDC();
+        labels->SetTextColor(2);
+        labels->Draw("same");
+    }
 
 
     canvas->Update();
@@ -160,6 +173,7 @@ void makePlotForStation(const vector<int>& StatusTimeNeventsNsec, string statioN
 
     //canvas->SaveAs((dirname+"/"+nameCanv+".png").c_str());
     canvas->Print((dirname+"/"+nameCanv+".png").c_str());
+    delete labels;
 
 }
 
