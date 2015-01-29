@@ -289,6 +289,6 @@ else
 fi
 done
 
-. setup.sh
+. /home/eas/monitor_stat/setup.sh
 LNPS=`ls | grep LNP`
-./diag.exe $LNPS
+/home/eas/monitor_stat/diag.exe $LNPS
