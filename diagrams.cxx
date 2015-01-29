@@ -34,7 +34,7 @@ using namespace std;
 
 vector<int> readDataFromFile(std::string namefile);
 void getParametersFromString(string S, vector<int>& Vec);
-void makePlotForStation(const vector<int>& StatusTimeNeventsNsec, string statioNumber);
+void makePlotForStation(const vector<int>& StatusTimeNeventsNsec, string statioNumber,string pwd);
 bool checkDir(string nameOfDir);
 
 int main (int argc, char** argv)
@@ -43,9 +43,11 @@ int main (int argc, char** argv)
 
     int stationNumber;
 
-    for (int i=0;i<argc-1;i++)
+    string pwd = string(argv[1]);
+
+    for (int i=0;i<argc-2;i++)
     {
-        string S = argv[i+1];
+        string S = argv[i+2];
         if (S.find("LNP")==string::npos) continue;
 
         size_t beg = 3;
@@ -53,8 +55,9 @@ int main (int argc, char** argv)
 
         stationNumber = atoi(stationNumberString.c_str());
         vector<int> vecSTNN;
-        vecSTNN = readDataFromFile(argv[i+1]);
+        string filename = pwd + "/" + string(argv[i+2]);
 
+        vecSTNN = readDataFromFile(filename);
         makePlotForStation(vecSTNN, stationNumberString);
     }
 }
@@ -100,10 +103,11 @@ void getParametersFromString(string S, vector<int>& Vec)
     }
 }
 
-void makePlotForStation(const vector<int>& StatusTimeNeventsNsec, string statioNumber)
+void makePlotForStation(const vector<int>& StatusTimeNeventsNsec, string statioNumber, string pwd)
 {
 
-    string dirname = "./img";
+    string dirname = pwd+"/img";
+    cout << dirname << endl;
     if (!checkDir(dirname.c_str())) mkdir(dirname.c_str(),0755);
     string nameCanv;
     nameCanv = "Station_"+statioNumber;
